@@ -2,7 +2,7 @@
 
 A Spring Boot/Angular project which is extend to my old projects [privateschool](https://github.com/GeorgeTsianakas/privateschool) and [trainersCRUD](https://github.com/GeorgeTsianakas/trainersCRUD).
 
-- **server** - Service implemented using Spring Boot, Spring Security, MySQL, Hibernate, Liquidbase.
+- **server** - Service implemented using Spring Boot, Spring Security, MySQL, Hibernate, Liquibase.
 - **client** - A NodeJs application implemented using Angular 10. This consumes services hosted by server side.
  
 #### 1) Build Server Side
