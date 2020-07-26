@@ -7,7 +7,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="1" author="sha">
+    <changeSet id="1" author="george">
         <sql>
             CREATE TABLE user (
             id BIGINT NOT NULL AUTO_INCREMENT,
@@ -22,7 +22,7 @@
             DROP TABLE user;
         </rollback>
     </changeSet>
-    <changeSet id="2" author="sha">
+    <changeSet id="2" author="george">
         <sql>
             CREATE TABLE course (
             id BIGINT NOT NULL AUTO_INCREMENT,
@@ -37,7 +37,7 @@
             DROP TABLE course;
         </rollback>
     </changeSet>
-    <changeSet id="3" author="sha">
+    <changeSet id="3" author="george">
         <sql>
             CREATE TABLE course_student (
             id BIGINT NOT NULL AUTO_INCREMENT,
@@ -54,7 +54,7 @@
             DROP TABLE course_student;
         </rollback>
     </changeSet>
-    <changeSet id="4" author="sha">
+    <changeSet id="4" author="george">
         <sql>
             INSERT INTO user (username, name, password, role) values("instructor1", "Instructor One", "random",
             "TEACHER");
@@ -67,7 +67,7 @@
             TRUNCATE TABLE user;
         </rollback>
     </changeSet>
-    <changeSet id="5" author="sha">
+    <changeSet id="5" author="george">
         <sql>
             INSERT INTO course (name, instructor_id) values("MAT-101", (select id from user where username =
             "instructor1"));
