@@ -1,4 +1,4 @@
-# privateschool REST Application using Spring Boot & Angular
+# privateschool REST Application using Spring Boot & Angular ![](https://img.shields.io/badge/Framework-Spring-informational?style=flat&logo=spring) ![](https://img.shields.io/badge/Framework-Angular-informational?style=flat&logo=angular)
 
 A Spring Boot/Angular project which is extend to my old projects [privateschool](https://github.com/GeorgeTsianakas/privateschool) and [trainersCRUD](https://github.com/GeorgeTsianakas/trainersCRUD).
 
