@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {CourseStudent} from '../../models/coursestudent';
+import {User} from '../../models/user';
+import {ManagerService} from '../../services/manager.service';
 
 @Component({
   selector: 'app-manager',
@@ -7,10 +10,21 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ManagerComponent implements OnInit {
 
-  constructor() {
+  enrollmentList: Array<CourseStudent>;
+  currentManager: User;
+
+  constructor(private managerService: ManagerService) {
+    this.currentManager = JSON.parse(localStorage.getItem('currentUser'));
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.findAllEnrollments();
+  }
+
+  findAllEnrollments() {
+    this.managerService.findAllEnrollments().subscribe(data => {
+      this.enrollmentList = data;
+    });
   }
 
 }
