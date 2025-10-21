@@ -38,6 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //These are public pages.
                 .antMatchers("/resources/**", "/error", "/api/user/**", "/actuator/**").permitAll()
+                //Swagger UI and OpenAPI endpoints - public access
+                .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 //These can be reachable for just have student role.
                 .antMatchers("/api/student/**").hasRole("STUDENT")
                 //These can be reachable for just have teacher role.
