@@ -1,6 +1,8 @@
 package com.privateschool.server.jwt;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,13 +46,17 @@ public class JwtTokenProvider {
         if (token == null) {
             return null;
         }
-        Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
-        String username = claims.getSubject();
-        List<GrantedAuthority> authorities = Arrays.stream(claims.get("roles").toString().split(","))
-                .map(role -> role.startsWith("ROLE_") ? role : "ROLE_" + role)
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
-        return username != null ? new UsernamePasswordAuthenticationToken(username, null, authorities) : null;
+        try {
+            Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
+            String username = claims.getSubject();
+            List<GrantedAuthority> authorities = Arrays.stream(claims.get("roles").toString().split(","))
+                    .map(role -> role.startsWith("ROLE_") ? role : "ROLE_" + role)
+                    .map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList());
+            return username != null ? new UsernamePasswordAuthenticationToken(username, null, authorities) : null;
+        } catch (JwtException | IllegalArgumentException e) {
+            return null;
+        }
     }
 
     public boolean validateToken(HttpServletRequest request) {
@@ -58,17 +64,20 @@ public class JwtTokenProvider {
         if (token == null) {
             return false;
         }
-        Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
-        if (claims.getExpiration().before(new Date())) {
+        try {
+            Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
+            return !claims.getExpiration().before(new Date());
+        } catch (ExpiredJwtException e) {
+            return false;
+        } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
-        return true;
     }
 
     private String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader(jwtHeaderString);
         if (bearerToken != null && bearerToken.startsWith(jwtTokenPrefix)) {
-            return bearerToken.substring(7, bearerToken.length());
+            return bearerToken.substring(jwtTokenPrefix.length());
         }
         return null;
     }

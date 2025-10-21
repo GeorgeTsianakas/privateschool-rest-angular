@@ -1,0 +1,57 @@
+# Docker ignore file to reduce image size and build time
+
+# Maven build output
+target/
+!target/*.jar
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+!DOCKER_README.md
+
+# Logs
+*.log
+logs/
+
+# Test files
+src/test/
+
+# Maven wrapper (included in Dockerfile)
+# .mvn/
+# mvnw
+# mvnw.cmd
+
+# Docker files
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# Environment files
+.env
+.env.local
+*.env
+
+# Temporary files
+tmp/
+temp/

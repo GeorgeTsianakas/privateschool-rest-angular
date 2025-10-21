@@ -24,11 +24,16 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        Authentication authentication = jwtTokenProvider.getAuthentication(request);
+        // First validate the token (even if absent/empty) so provider can decide validity
+        boolean valid = jwtTokenProvider.validateToken(request);
 
-        if (authentication != null && jwtTokenProvider.validateToken(request)) {
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        if (valid) {
+            Authentication authentication = jwtTokenProvider.getAuthentication(request);
+            if (authentication != null) {
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
         }
+        // Always continue the filter chain
         chain.doFilter(request, response);
     }
 

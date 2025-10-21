@@ -44,12 +44,19 @@ public class UserController {
 
     @GetMapping("/api/user/login")
     public ResponseEntity<?> getUser(Principal principal) {
-        if (principal == null) {
-            //This should be ok http status because here will be logout path.
-            return ResponseEntity.ok(principal);
+        if (!(principal instanceof UsernamePasswordAuthenticationToken)) {
+            // When there is no authenticated user (e.g., anonymous), return 200 OK with empty body
+            return ResponseEntity.ok().build();
         }
         UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) principal;
+        // Only proceed for tokens without credentials (e.g., stateless JWT auth). Otherwise, return OK without side effects.
+        if (authenticationToken.getCredentials() != null) {
+            return ResponseEntity.ok().build();
+        }
         User user = userService.findByUsername(authenticationToken.getName());
+        if (user == null) {
+            return ResponseEntity.ok().build();
+        }
         user.setToken(tokenProvider.generateToken(authenticationToken));
         return new ResponseEntity<>(user, HttpStatus.OK);
     }

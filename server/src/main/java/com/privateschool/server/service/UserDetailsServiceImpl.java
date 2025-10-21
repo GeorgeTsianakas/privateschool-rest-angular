@@ -25,13 +25,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username).orElse(null);
         if (user == null) {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException("User not found with username: " + username);
         }
 
         Set<GrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+        // Handle null password - use empty string as Spring Security User doesn't accept null
+        String password = user.getPassword() != null ? user.getPassword() : "";
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), password, authorities);
     }
 
 }

@@ -1,0 +1,33 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea_modules/
+
+# Operating System
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Environment files with secrets
+.env
+*.env.local
+
+# Build artifacts (handled by subproject .gitignores)
+# These are already covered by server/.gitignore and client/.gitignore

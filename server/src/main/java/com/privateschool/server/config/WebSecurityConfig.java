@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and()
                 .authorizeRequests()
                 //These are public pages.
-                .antMatchers("/resources/**", "/error", "/api/user/**").permitAll()
+                .antMatchers("/resources/**", "/error", "/api/user/**", "/actuator/**").permitAll()
                 //These can be reachable for just have student role.
                 .antMatchers("/api/student/**").hasRole("STUDENT")
                 //These can be reachable for just have teacher role.
@@ -51,8 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/api/user/logout", "POST"))
                 .and()
-                //login form and path.
-                .formLogin().loginPage("/api/user/login").and()
+                //Disable default form login to avoid conflicting with REST login endpoint
+                .formLogin().disable()
                 //Enable basic authentication http header "basic: username:password"
                 .httpBasic().and()
                 //Cross side request forgery.
