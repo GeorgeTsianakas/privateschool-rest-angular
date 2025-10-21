@@ -1,9 +1,11 @@
 # Private School REST API - Dockerized Microservice
 
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.3.2-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Java](https://img.shields.io/badge/Java-8-blue.svg)](https://www.oracle.com/java/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3%20LTS-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-17%2B-blue.svg)](https://www.oracle.com/java/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+> Note: This branch is being updated to target Spring Boot 3.3 LTS. Minimum required Java is 17 (Java 21 LTS recommended). Some instructions may differ until the migration is fully complete.
 
 A production-ready, cloud-native RESTful API microservice for private school management. Built with Spring Boot and packaged as a **standalone executable JAR** (no external Tomcat required) with complete Docker containerization support.
 
@@ -160,7 +162,7 @@ The Private School REST API is a comprehensive backend system for managing schoo
 ## Technology Stack
 
 ### Backend Framework
-- **Spring Boot 2.3.2** - Application framework
+- **Spring Boot 3.3.x (LTS target)** - Application framework
 - **Spring Data JPA** - Data persistence
 - **Spring Security** - Authentication and authorization
 - **Spring Boot Actuator** - Monitoring and metrics
@@ -271,7 +273,7 @@ docker-compose down
 If you prefer local development:
 
 #### Prerequisites:
-- Java 8 or higher
+- Java 17+ (Java 21 LTS recommended)
 - Maven 3.6+
 - MySQL 8.0
 

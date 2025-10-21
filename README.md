@@ -1,11 +1,13 @@
 # Private School Management System
 
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.3.2-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3%20LTS-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![Angular](https://img.shields.io/badge/Angular-10-red.svg)](https://angular.io/)
-[![Java](https://img.shields.io/badge/Java-8-blue.svg)](https://www.oracle.com/java/)
+[![Java](https://img.shields.io/badge/Java-17%2B-blue.svg)](https://www.oracle.com/java/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-orange.svg)](https://www.mysql.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+> Note: This branch is being updated to target Spring Boot 3.3 LTS. Minimum required Java is 17 (Java 21 LTS recommended). Some instructions may differ until the migration is fully complete.
 
 A modern, full-stack web application for private school management built with **Spring Boot** (backend) and **Angular** (frontend). This project is an evolution of [privateschool](https://github.com/GeorgeTsianakas/privateschool) and [trainersCRUD](https://github.com/GeorgeTsianakas/trainersCRUD), now featuring a production-ready microservice architecture with Docker containerization.
 
@@ -79,7 +81,7 @@ ng serve
 
 ### Option 2: Local Development (Without Docker)
 
-**Prerequisites**: Java 8+, Maven 3.6+, Node.js 14+, MySQL 8.0
+**Prerequisites**: Java 17+ (21 LTS recommended), Maven 3.9+, Node.js 14+, MySQL 8.0
 
 #### 1. Setup MySQL Database
 ```sql
@@ -114,6 +116,13 @@ ng serve
 ---
 
 ## 📚 Documentation
+
+### Spring Boot LTS Upgrade Notes (this branch)
+- Targeting Spring Boot 3.3 LTS and Java 17+ (Java 21 LTS recommended).
+- Jakarta namespace migration: jakarta.* replaces javax.* in Boot 3.x.
+- Spring Security changes: WebSecurityConfigurerAdapter removed; configuration will be via SecurityFilterChain beans.
+- Verify third-party dependencies for 3.x compatibility.
+- Some instructions below may still show 2.x-era examples until migration is finished.
 
 ### Backend (Server)
 **📖 [Complete Server Documentation](server/README.md)** - Detailed guide including:
@@ -185,7 +194,7 @@ curl -X GET http://localhost:8080/api/user/courses \
 ## 🏗️ Technology Stack
 
 ### Backend
-- **Spring Boot 2.3.2** - Application framework
+- **Spring Boot 3.3.x (LTS target)** - Application framework
 - **Spring Security** - Authentication & authorization
 - **Spring Data JPA** - Database persistence
 - **JWT (jjwt)** - Token-based authentication
